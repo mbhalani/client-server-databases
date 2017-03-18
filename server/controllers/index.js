@@ -1,5 +1,5 @@
 
-console.log('CONTROLLER/controller.js: begin of file');
+console.log('CONTROLLERS/index.js: begin of file');
 
 const models =require('../models');
 
