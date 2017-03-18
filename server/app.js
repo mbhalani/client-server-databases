@@ -4,7 +4,7 @@ console.log('SERVER/app.js: begin of file');
 // setup express server
 const express = require('express');
 // database
-// const db = require('./db');
+const db = require('./db');
 // router
 const router = require('./routes');
 
@@ -23,7 +23,7 @@ app.use(morgan('dev'));
 app.use(parser.json());
 
 // set up our routes
-// app.use('/classes', router);
+app.use('/classes', router);
 
 // serve the client files
 app.use(express.static(__dirname + '/../client'));

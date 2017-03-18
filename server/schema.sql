@@ -25,8 +25,8 @@ CREATE TABLE users (
 );
 
 -- placeholder (populate database with following records)
-INSERT INTO users (username) VALUES ('Mukesh'), ('Mitt'), ('Krish');
-INSERT INTO messages (userid, text, roomname) VALUES (1, 'Hello', 'main'), (2, 'Whats up', 'lobby'), (3, 'How are you?', 'lobby');
+-- INSERT INTO users (username) VALUES ('Mukesh'), ('Mitt'), ('Krish');
+-- INSERT INTO messages (userid, text, roomname) VALUES (1, 'Hello', 'main'), (2, 'Whats up', 'lobby'), (3, 'How are you?', 'lobby');
 
 /*  Execute this file from the command line by typing:
  *    mysql -u root < server/schema.sql
