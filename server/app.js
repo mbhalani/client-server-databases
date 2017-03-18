@@ -6,7 +6,7 @@ const express = require('express');
 // database
 // const db = require('./db');
 // router
-// const router = require('./routes');
+const router = require('./routes');
 
 // Middleware
 const morgan = require('morgan');
