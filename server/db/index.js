@@ -1,5 +1,5 @@
 
-console.log('DB/index.js: begin of file');
+console.log('SERVER/DB/index.js: begin of file');
 
 const mysql = require('mysql');
 

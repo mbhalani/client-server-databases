@@ -1,5 +1,5 @@
 
-console.log('ROUTES/index.js: begin of file');
+console.log('SERVER/ROUTES/index.js: begin of file');
 
 const controller = require('../controllers');
 const router = require('express').Router();

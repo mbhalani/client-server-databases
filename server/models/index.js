@@ -1,5 +1,5 @@
 
-console.log('MODELS/index.js: begin of file');
+console.log('SERVER/MODELS/index.js: begin of file');
 
 const db = require('../db');
 
