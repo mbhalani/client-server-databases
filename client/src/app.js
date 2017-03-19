@@ -25,6 +25,7 @@ var app = {
 
   // POST the message to the server
   send: function(message) {
+    app.startSpinner();
 
   },
 
@@ -38,5 +39,17 @@ var app = {
     app.send(message);
     // stop the form from submitting
     event.preventDefault();
-  }
+  },
+
+
+
+
+  startSpinner: function() {
+    $('.spinner img').show();
+    $('from input[type=submit').attr('disabled', 'true');
+  },
+  stopSpinner: function() {
+    $('.spinner img').fadeOut('fast');
+    $('from input[type=submit').attr('disabled', null);
+  },
 };
