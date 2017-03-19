@@ -20,6 +20,23 @@ var app = {
     app.$send = $('#send');
 
     // add listeners
+    app.$send.on('submit', app.handleSubmit);
+  },
 
+  // POST the message to the server
+  send: function(message) {
+
+  },
+
+  handleSubmit: function(event) {
+    var message = {
+      username: app.username,
+      text: app.$message.val(),
+      roomname: app.roomname || 'lobby',
+    };
+
+    app.send(message);
+    // stop the form from submitting
+    event.preventDefault();
   }
 };
