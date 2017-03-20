@@ -9,6 +9,7 @@ module.exports = {
     get: function(request, response) {
       console.log('CONTROLLERS: msg-GET: ');
       models.messages.get(function(err, results) {
+        console.log('json', results, err);
         if (err) { throw err; }
         response.json(results);
       });
@@ -16,7 +17,7 @@ module.exports = {
     // a function which handles posting a message to the database
     post: function(request, response) {
       console.log('CONTROLLERS: msg-POST: ', request.body);
-      var data = [request.body.username, request.body.message, request.body.roomname];
+      var data = [request.body.username, request.body.text, request.body.roomname];
       models.messages.post(data, function(err, results) {
         if (err) { throw err; }
         response.sendStatus(201);

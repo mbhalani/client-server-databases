@@ -21,7 +21,11 @@ app.set('port', 3000);
 // logging and parsing
 app.use(morgan('dev'));
 app.use(parser.json());
-
+app.use(function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
 // set up our routes
 app.use('/classes', router);
 
