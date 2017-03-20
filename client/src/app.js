@@ -55,7 +55,7 @@ var app = {
 
   // update messages list
   fetch: function(animate) {
-    // app.startSpinner();
+    app.startSpinner();
 
     $.ajax({
       url: app.server,
@@ -71,8 +71,10 @@ var app = {
         var mostRecentMessage = data[data.length - 1];
         // update DOM only if we have a new message
         if (mostRecentMessage.id !== app.lastMessageId) {
+          //update UI with fetched rooms
+          app.renderRoomList(data);
 
-
+          // update UI with fetched messages
           app.renderMessages(data, animate);
           app.lastMessageId = mostRecentMessage.id;
         }
@@ -88,6 +90,25 @@ var app = {
 
   clearMessages: function() {
     app.$chats.html('');
+  },
+
+  renderRoomList: function(messages) {
+    app.$roomSelect.html('<option value="__newRoom">New room...</option>');
+
+    if (messages) {
+      var rooms = {};
+      messages.forEach(function(message) {
+        var roomname = message.roomname;
+        if (roomname && !rooms[roomname]) {
+          // Add the room to the select menu
+          app.renderRoom(roomname);
+          // Store that we've added this room already
+          rooms[roomname] = true;
+        }
+      });
+    }
+    // Select the menu option
+    app.$roomSelect.val(app.roomname);
   },
 
   renderMessages: function(messages, animate) {
@@ -144,12 +165,40 @@ var app = {
     event.preventDefault();
   },
 
-  handleRoomChange: function(event) {
+  renderRoom: function(roomname) {
+    // prevent XSS by escaping with DOM methods
+    var $option = $('<option/>').val(roomname).text(roomname);
+    app.$roomSelect.append($option);
+  },
 
+  handleRoomChange: function(event) {
+    var selectIndex = app.$roomSelect.prop('selectIndex');
+
+    if (selectIndex === 0) {
+      // set as current room
+      app.roomname = roomSelect;
+      // add room to menu
+      app.renderRoom(roomname);
+      // select menu option
+      app.$roomSelect.val(roomname);
+    } else {
+      // store undefined for empty names
+      app.roomname = app.$roomSelect.val();
+    }
+    // rerender messages
+    app.renderMessages(app.messages);
   },
 
   handleUsernameClick: function(event) {
+    var username = $(event.target).data('username');
 
+    if (username !== undefined) {
+      app.friends[username] = !app.friends[username];
+      // escape username in case it contains a quote
+      var selector = '[data-username="' + username.replace(/"/g, '\\\"') + '"]';
+      // add 'friend' CSS class to all of that uer's messages
+      var $username = $(selector).toggleClass('friend');
+    }
   },
 
 
